@@ -1,0 +1,50 @@
+2024-08-29 21:03:06.431310+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PERSON" not found (this database is empty); SQL statement:
+select p1_0.id,p1_0.birth_date,p1_0.email,p1_0.first_name,p1_0.last_name,p1_0.salary from person p1_0 [42104-224]
+2024-09-01 14:29:53.586912+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM PERSON \000d\000a\000d\000a[*]select photo_file_name from person where id in (1, 404)"; SQL statement:
+SELECT * FROM PERSON 
+
+select photo_file_name from person where id in (1, 404) [42000-224]
+2024-09-01 14:30:19.352566+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM PERSON \000d\000a\000d\000a[*]select photo_file_name from person where id in (1, 404)"; SQL statement:
+SELECT * FROM PERSON 
+
+select photo_file_name from person where id in (1, 404) [42000-224]
+2024-09-01 14:30:25.486481+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM PERSON \000d\000a\000d\000a[*]select photo_file_name from person where id in (1)"; SQL statement:
+SELECT * FROM PERSON 
+
+select photo_file_name from person where id in (1) [42000-224]
+2024-09-01 14:30:33.070785+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM PERSON \000d\000a\000d\000a[*]select photo_file_name from person where id=1"; SQL statement:
+SELECT * FROM PERSON 
+
+select photo_file_name from person where id=1 [42000-224]
+2024-09-01 14:30:38.859514+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM PERSON \000d\000a\000d\000a[*]select photo_file_name from person where id=1"; SQL statement:
+SELECT * FROM PERSON 
+
+select photo_file_name from person where id=1 [42000-224]
+2024-09-01 14:30:39.725320+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM PERSON \000d\000a\000d\000a[*]select photo_file_name from person where id=1"; SQL statement:
+SELECT * FROM PERSON 
+
+select photo_file_name from person where id=1 [42000-224]
+2024-09-01 14:30:44.223459+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM PERSON \000d\000a\000d\000a[*]select photo_file_name from person where id=1"; SQL statement:
+SELECT * FROM PERSON 
+
+select photo_file_name from person where id=1 [42000-224]
+2024-09-01 14:41:41.527727+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "select photo_file_name from person where id in [*]: ids;"; expected "("; SQL statement:
+select photo_file_name from person where id in : ids; [42001-224]
+2024-09-01 14:42:23.003922+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "select photo_file_name from person where id in [*]: ids"; expected "("; SQL statement:
+select photo_file_name from person where id in : ids [42001-224]
+2024-09-01 14:42:32.568383+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "select photo_file_name from person where id in [*]: ids"; expected "("; SQL statement:
+select photo_file_name from person where id in : ids [42001-224]
+2024-09-01 14:43:29.693293+01:00 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "select photo_file_name from person where id in [*]: ids"; expected "("; SQL statement:
+select photo_file_name from person where id in : ids [42001-224]

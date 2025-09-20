@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>People</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <div class="col-lg-6 col-sm-10 col-md-6 mx-auto my-5">
+      <h2 th:text="#{people.list}">People List</h2>
+      <form action="" method="post" enctype="multipart/form-data">
+          <table class="table table-bordered table-sm table-striped table-hover">
+              <thead>
+                  <tr>
+                      <th scope="col">Select</th>
+                      <th scope="col">ID</th>
+                      <th scope="col" th:text="#{last.name}">Last Name</th>
+                      <th scope="col" th:text="#{first.name}">First Name</th>
+                      <th scope="col" class="d-sm-none d-md-table-cell">Email</th>
+                      <th scope="col">DOB</th>
+                      <th scope="col">Salary</th>
+                      <th scope="col">Photo</th>
+                  </tr>
+              </thead>
+              <tbody>
+              <tr th:if="${#lists.isEmpty(people)}">
+                  <td colspan="6" class="text-center">No Data</td>
+              </tr>
+              <tr th:each="person : ${people}">
+                  <td><input type="checkbox" name="selections" th:value="${person.id}" class="form-check-input"></td>
+                  <th scope="row" th:text="${person.id}">1</th>
+                  <td th:text="${person.lastName}">Mark</td>
+                  <td th:text="${person.firstName}">Otto</td>
+                  <td th:text="${person.email}" class="d-sm-none d-md-table-cell">Otto</td>
+                  <td th:text="${#temporals.format(person.birthDate, 'MMM dd, yyyy')}">@mdo</td>
+                  <td class="text-end" th:text="${{person.salary}}">@mdo</td>
+<!--                  <td th:text="${person.photoFileName}">@mdo</td>-->
+                  <td><img th:src="@{/people/images/{filename}(filename=${person.photoFileName})}" alt="" height="32px" width="32px"></td>
+              </tr>
+              <tr th:remove="all">
+                  <th scope="row">2</th>
+                  <td>Jacob</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+              </tr>
+              <tr th:remove="all">
+                  <th scope="row">3</th>
+                  <td colspan="2">Larry the Bird</td>
+                  <td>@twitter</td>
+              </tr>
+              </tbody>
+          </table>
+          <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                  <li class="page-item" th:classappend="${people.first} ? 'disabled'"><a class="page-link" th:href="@{people(page=${people.number - 1})}">Previous</a></li>
+<!--                  @ symbol is used for dynamically inject url in thymeleaf
+                       ${} is used to refer to a variable-->
+                  <li th:each="page : ${#numbers.sequence(0, people.totalPages - 1)}" th:classappend="${people.number} == ${page} ? 'active'"  class="page-item"><a class="page-link" th:href="@{people(page=${page})}" th:text="${page + 1}" >1</a></li>
+                  <li class="page-item" th:classappend="${people.last} ? 'disabled'"><a class="page-link" th:href="@{people(page=${people.number + 1})}">Next</a></li>
+              </ul>
+          </nav>
+          <div class="mb-3">
+              <label for="csvFile" class="form-label">CSV File</label>
+              <input class="form-control" type="file" id="csvFile" name="csvFile">
+          </div>
+          <button type="submit" class="btn btn-primary mb-5 me-3" name="action" value="edit">Edit</button>
+          <button type="submit" class="btn btn-success mb-5 me-3" name="action" value="import">Import CSV</button>
+          <button type="submit" class="btn btn-danger mb-5" name="action" value="delete">Delete</button>
+      </form>
+
+      <div class="alert alert-danger" role="alert" th:text="${errorMsg}" th:if="${errorMsg}" >
+          Error message
+      </div>
+
+      <h2 class="mb-2" >Person Form</h2>
+      <form th:object="${person}" action="" method="post" novalidate enctype="multipart/form-data">
+          <div class="mb-3">
+              <label for="firstName" class="form-label">First Name</label>
+              <input type="text" class="form-control" id="firstName" th:field="*{firstName}" th:errorclass="is-invalid"  aria-describedby="firstNameHelp">
+              <div id="validationFirstNameFeedback" class="invalid-feedback" th:errors="*{firstName}">
+                  error message.
+              </div>
+          </div>
+          <div class="mb-3">
+              <label for="lastName" class="form-label">Last Name</label>
+              <input type="text" class="form-control" id="lastName" th:field="${person.lastName}" th:errorclass="is-invalid" aria-describedby="lastNameHelp">
+              <div id="validationLastNameFeedback" class="invalid-feedback" th:errors="*{lastName}">
+                  error message.
+              </div>
+          </div>
+          <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" th:field="${person.email}" th:errorclass="is-invalid" aria-describedby="emaileHelp">
+              <div id="validationEmailFeedback" class="invalid-feedback" th:errors="*{email}">
+                  error message.
+              </div>
+          </div>
+          <div class="mb-3">
+              <label for="dob" class="form-label">Date of Birth</label>
+              <input type="date" class="form-control" id="dob" th:field="${person.birthDate}" th:errorclass="is-invalid" aria-describedby="dobHelp">
+              <div id="validationdobFeedback" class="invalid-feedback" th:errors="*{birthDate}">
+                  error message.
+              </div>
+          </div>
+          <div class="mb-3">
+              <label for="salary" class="form-label">Salary</label>
+              <input type="number" class="form-control" id="salary" th:field="${person.salary}" th:errorclass="is-invalid" aria-describedby="salary">
+              <div id="validationSalaryFeedback" class="invalid-feedback" th:errors="*{salary}">
+                  error message.
+              </div>
+          </div>
+          <div class="mb-3">
+              <label for="photoFileName" class="form-label">Photo File</label>
+              <input class="form-control" type="file" id="photoFileName" th:field="*{photoFileName}">
+          </div>
+            <input type="hidden" th:field="*{id}" >
+          <button type="submit" class="btn btn-primary">Save Person</button>
+      </form>
+  </div>
+</body>
+</html>

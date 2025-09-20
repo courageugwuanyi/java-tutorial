@@ -27,3 +27,9 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+.idea/
+*.iml
+
+# Large Files #
+h2/
+Hr5m.zip
